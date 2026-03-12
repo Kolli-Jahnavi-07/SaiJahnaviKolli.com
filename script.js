@@ -4,26 +4,26 @@ function jumpTo(id){
   el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-// Buttons with data-jump=""
 document.querySelectorAll("[data-jump]").forEach(btn => {
   btn.addEventListener("click", () => jumpTo(btn.getAttribute("data-jump")));
 });
 
-// Auto year
-document.getElementById("year").textContent = new Date().getFullYear();
+const yearEl = document.getElementById("year");
+if (yearEl) {
+  yearEl.textContent = new Date().getFullYear();
+}
 
-// ── CSS Pipeline Animation ──────────
 (function(){
   const pipelineEl = document.getElementById('cssPipeline');
   if(!pipelineEl) return;
 
-  const stages = [
-    { icon: '⬛', label: 'INGEST' },
-    { icon: '🔀', label: 'PARSE' },
-    { icon: '⚗️', label: 'TRANSFORM' },
-    { icon: '🧮', label: 'ENRICH' },
-    { icon: '📦', label: 'LOAD' },
-  ];
+ const stages = [
+  { icon: '⬛', label: 'INGEST' },
+  { icon: '🔀', label: 'TRANSFORM' },
+  { icon: '⚗️', label: 'VALIDATE' },
+  { icon: '🧮', label: 'CURATE' },
+  { icon: '📦', label: 'SERVE' },
+];
 
   stages.forEach((s, i) => {
     const stageEl = document.createElement('div');
