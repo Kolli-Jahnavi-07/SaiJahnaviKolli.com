@@ -1,1 +1,1 @@
-# SaiJahnaviKolli.tech
+# SaiJahnaviKolli.com
