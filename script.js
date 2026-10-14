@@ -141,7 +141,7 @@ function applyFilter(tool) {
     const chip = [...chips].find((c) => c.dataset.filter === tool);
     status.textContent = tool === "all"
       ? ""
-      : `${count} ${count === 1 ? "place" : "places"} in my work and projects use ${chip ? chip.textContent : tool}.`;
+      : `${count} ${count === 1 ? "place in my work and projects uses" : "places in my work and projects use"} ${chip ? chip.textContent : tool}.`;
   }
 }
 
