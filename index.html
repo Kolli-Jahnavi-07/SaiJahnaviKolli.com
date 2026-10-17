@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
   <script>
     try { var t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
   </script>
@@ -187,16 +187,77 @@
       <h2 class="section-title" id="projects-title">Projects</h2>
 
       <div class="projects">
-        <article class="project" data-tools="snowflake sql python spark aws">
-          <h3>Snowflake cloud data engineering solution</h3>
-          <p>Continuous, incremental ELT on Snowflake. Snowpipe handles continuous loading, Streams track changes, and Tasks schedule processing, together forming CDC pipelines that keep analytics tables current without full reloads.</p>
-          <p class="stack">Snowflake, SQL, Python, PySpark, AWS</p>
+        <article class="project" data-tools="snowflake sql python aws cicd">
+          <h3>Snowflake incremental ELT (CDC)</h3>
+          <p>Files land in S3 and Snowpipe loads them as they arrive. Streams capture exactly what changed, and a Task graph merges only those changes into current-state tables, SCD Type 2 history and a daily mart, with no full reloads. Tested end to end against late, duplicate and invalid data, including tasks that fail mid-run.</p>
+          <p class="stack">Snowflake (Snowpipe, Streams, Tasks), SQL, Python, AWS S3, GitHub Actions</p>
+          <p class="project-links">
+            <a href="https://github.com/Kolli-Jahnavi-07/snowflake-incremental-elt" target="_blank" rel="noreferrer">Code on GitHub</a>
+          </p>
         </article>
 
-        <article class="project" data-tools="python sql spark snowflake azure cicd">
-          <h3>Cloud data integration and analytics platform</h3>
-          <p>Integration and transformation workflows across AWS and Azure that feed a Snowflake warehouse. Data modeling, validation checks, and CI/CD keep the pipelines production-ready.</p>
-          <p class="stack">Python, SQL, Spark, Snowflake, Azure Data Factory, CI/CD</p>
+        <article class="project" data-tools="python aws azure snowflake cicd">
+          <h3>Multi-cloud ingestion framework</h3>
+          <p>One config-driven framework ingests REST APIs, databases and vendor file drops into S3 and ADLS Gen2, checks every batch against a data contract, and merges it into Snowflake. Survives crashes without duplicates; orchestrated by Azure Data Factory, with infrastructure in Terraform.</p>
+          <p class="stack">Python, AWS S3/IAM, Azure Data Factory, ADLS Gen2, Snowflake, Terraform, Docker</p>
+          <p class="project-links">
+            <a href="https://github.com/Kolli-Jahnavi-07/multicloud-ingestion-framework" target="_blank" rel="noreferrer">Code on GitHub</a>
+          </p>
+        </article>
+
+        <article class="project" data-tools="python sql aws snowflake">
+          <h3>EV battery-health lakehouse on Apache Iceberg</h3>
+          <p>Connected-vehicle telemetry flows into Iceberg tables that score the residual-value risk of leased EVs from battery health. Uses upserts, schema and partition evolution, time travel to past reports, and compaction and snapshot expiry to keep it fast.</p>
+          <p class="stack">Apache Iceberg, PyIceberg, DuckDB, Parquet, AWS Glue, Snowflake</p>
+          <p class="project-links">
+            <a href="https://github.com/Kolli-Jahnavi-07/iceberg-lakehouse" target="_blank" rel="noreferrer">Code on GitHub</a>
+          </p>
+        </article>
+
+        <article class="project" data-tools="python sql cicd">
+          <h3>RAG ingestion pipeline for an AI assistant</h3>
+          <p>The data side of retrieval-augmented generation: syncs a changing policy library incrementally, redacts personal data, chunks and embeds only what changed, and serves hybrid vector and keyword search. A retrieval-accuracy check runs in CI on every change.</p>
+          <p class="stack">Python, embeddings, vector and BM25 search, DuckDB, pgvector</p>
+          <p class="project-links">
+            <a href="https://github.com/Kolli-Jahnavi-07/rag-ingestion-pipeline" target="_blank" rel="noreferrer">Code on GitHub</a>
+          </p>
+        </article>
+
+        <article class="project" data-tools="python spark">
+          <h3>Real-time fraud detection</h3>
+          <p>Card transactions stream through Kafka into Spark Structured Streaming, where windowed rules and stream-to-stream joins flag fraud in about four seconds, written exactly once to Delta Lake and tested by crashing the job mid-stream.</p>
+          <p class="stack">Kafka, Spark Structured Streaming, Delta Lake, Python, Docker</p>
+          <p class="project-links">
+            <a href="https://github.com/Kolli-Jahnavi-07/realtime-fraud-streaming" target="_blank" rel="noreferrer">Code on GitHub</a>
+          </p>
+        </article>
+
+        <article class="project" data-tools="python sql spark snowflake airflow">
+          <h3>Auto loan risk analytics</h3>
+          <p>Raw loan servicing data cleaned in PySpark and modeled with dbt into a tested star schema, with vintage, delinquency and dealer-risk marts on Snowflake, orchestrated by Airflow.</p>
+          <p class="stack">PySpark, dbt, Snowflake, Airflow, SQL</p>
+          <p class="project-links">
+            <a href="https://github.com/Kolli-Jahnavi-07/automotive-loan-risk-analytics" target="_blank" rel="noreferrer">Code on GitHub</a>
+          </p>
+        </article>
+
+        <article class="project" data-tools="python sql airflow">
+          <h3>Medallion CDC pipeline</h3>
+          <p>Change events from an operational database flow through bronze, silver and gold layers with idempotent loads, SCD Type 2 history and a quality gate, then reconcile with the source row for row.</p>
+          <p class="stack">Python, SQL, DuckDB, Airflow</p>
+          <p class="project-links">
+            <a href="https://github.com/Kolli-Jahnavi-07/de-medallion-pipeline" target="_blank" rel="noreferrer">Code on GitHub</a>
+          </p>
+        </article>
+
+        <article class="project" data-tools="sql">
+          <h3>DataWhisperer</h3>
+          <p>A browser-based CSV profiler: drop in a file to see types, missing values, distributions and data-quality issues, then export generated dbt tests and Snowflake or Postgres DDL. Nothing leaves the browser.</p>
+          <p class="stack">TypeScript, DuckDB-WASM, SQL, Vite, Playwright</p>
+          <p class="project-links">
+            <a href="https://github.com/Kolli-Jahnavi-07/DataWhisperer" target="_blank" rel="noreferrer">Code on GitHub</a>
+            <a href="https://kolli-jahnavi-07.github.io/DataWhisperer/" target="_blank" rel="noreferrer">Live demo</a>
+          </p>
         </article>
       </div>
     </section>

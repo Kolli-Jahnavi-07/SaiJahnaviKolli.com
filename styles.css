@@ -456,6 +456,14 @@ a:hover{ text-decoration-thickness: 2px; }
   color: var(--flow);
   font-weight: 500;
 }
+.project .project-links{
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  font-size: 15px;
+  font-weight: 500;
+}
 @media (max-width: 760px){
   .projects{ grid-template-columns: 1fr; }
 }
